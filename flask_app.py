@@ -1,8 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
+import requests
+
 from urllib.parse import urlparse
 import urllib.request
 from bs4 import BeautifulSoup
-import requests
+import difflib
 
 app = Flask(__name__)
 app.secret_key = "DFghBN$JMK!BN"  # Required for flash messages
