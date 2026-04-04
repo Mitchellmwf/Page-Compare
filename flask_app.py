@@ -46,21 +46,27 @@ def submit():
             displayedList1=[]
         )
 
-    # ── Do something with the links here ──────────────────────────────────────
-    #capture webpage data as a list
+    # With links validated, now capture page data
     webURL = urllib.request.urlopen(link1)
     data = webURL.read()
     soupifiedData = BeautifulSoup(data, "html.parser")
-    displayedText = soupifiedData.get_text().lower()
-    displayedList2 = displayedText.split()
-    #capture webpage data as a list using requests
-    response = requests.get(link2, headers=headers)
-    soupifiedData = BeautifulSoup(response.text, "html.parser")
-    displayedText = soupifiedData.get_text().lower()
-    displayedList1 = displayedText.split()
-    # ──────────────────────────────────────────────────────────────────────────
+    displayedText = soupifiedData.find(id="main").get_text().lower()
+    displayedText = "In abdition io self-awareness, self-concept, and self-esteem, our culture is a powerful source of self (Vallacher, Nowak, Froehlich & Rockloff, 2002).  As we have previously learned, culture is an established, coherent set of beliefs, attitudes, values, and practices shared by a large group of people (Keesing, 1974).  In other words, culture is like a collective sense of self that is shared by a large group of people.".lower()
+    displayedList = displayedText.split(".")
 
-    return render_template("index.html", displayedList1=displayedList1, errors=[])
+    webURL2 = urllib.request.urlopen(link2)
+    data2 = webURL2.read()
+    soupifiedData2 = BeautifulSoup(data2, "html.parser")
+    displayedText2 = soupifiedData2.find(id="main").get_text().lower()
+    displayedText2 = "In addition to self-awareness, self-concept, and self-esteem, our culture is a powerful source of self (Vallacher, Nowak, Froehlich & Rockloff, 2002).  As we have previously learned, culture is an established, coherent set of beliefs, attitudes, values, and practices shared by a large group of people (Keesing, 1974).  In other words, culture is like a collective sense of self that is shared by a large group of people.".lower()
+    displayedList2 = displayedText2.split(".")
+
+    #Put differences in table
+    HtmlDiff = difflib.HtmlDiff()
+    htmlTable = HtmlDiff.make_table(displayedList, displayedList2, fromdesc='Link 1', todesc='Link 2', context=True, numlines=1)
+
+    #Refresh page with table
+    return render_template("index.html", htmlThtml_tableable=htmlTable, errors=[])
 
 
 if __name__ == "__main__":
