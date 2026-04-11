@@ -111,7 +111,7 @@ def submit():
     displayedList = re.split(splitChars, displayedText)
     displayStrip1 = [line.strip() for line in displayedList]
 
-   data2 = fetch(link2)
+    data2 = fetch(link2)
     soupifiedData2 = BeautifulSoup(data2, "html.parser")
 
     displayedText2 = soupifiedData2.get_text().lower()
