@@ -11,12 +11,17 @@ app.secret_key = "DFghBN$JMK!BN"  # Required for flash messages
 
 headers = {"User-Agent": "Mozilla/5.0"}
 
-def is_valid_url(url: str) -> bool:
-    """Basic URL validation."""
+
+def checkURL(url: str) -> bool:
+    #Check if links have https:// via regex
+    if url == None or not re.match(r'^https?://', url):
+        print("Invalid URL format. Please include 'http://' or 'https://'.")
+        return False
     try:
-        result = urlparse(url)
-        return all([result.scheme in ("http", "https"), result.netloc])
-    except ValueError:
+        urllib.request.urlopen(url)
+        return True
+    except Exception as e:
+        print(f"Error fetching data: {e}. Please try again.")
         return False
 
 
