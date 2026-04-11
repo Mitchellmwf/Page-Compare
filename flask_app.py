@@ -105,20 +105,13 @@ def submit():
     # When false, page still has css, burt is more plain and easier to compare
     needStyles = False
 
-
-    #link1 = "https://ecampusontario.pressbooks.pub/commbusprofcdn/chapter/the-evolution-of-digital-media/"
-    ###link1 = "https://ecampusontario.pressbooks.pub/orgbiochemsupplement/chapter/alkanes-alkenes-alkynes/"
-    ##link1 = "https://socialsci.libretexts.org/Bookshelves/Communication/Intercultural_Communication/Book%3A_Intercultural_Communication_for_the_Community_College_(Karen_Krumrey-Fulks)/01%3A_Chapters/1.04%3A_Self_and_Identity"
     data = fetch(link1)
     soupifiedData = BeautifulSoup(data, "html.parser")
     displayedText = soupifiedData.get_text().lower()
     displayedList = re.split(splitChars, displayedText)
     displayStrip1 = [line.strip() for line in displayedList]
 
-    ##link2 = "https://openoregon.pressbooks.pub/comm115/chapter/chapter-3/"
-    #link2 = "https://ecampusontario.pressbooks.pub/llsadvcomm/chapter/7-1-the-evolution-of-digital-media/"
-    ###link2 = "https://boisestate.pressbooks.pub/chemistry/chapter/21-1-hydrocarbons/"
-    data2 = fetch(link2)
+   data2 = fetch(link2)
     soupifiedData2 = BeautifulSoup(data2, "html.parser")
 
     displayedText2 = soupifiedData2.get_text().lower()
@@ -152,12 +145,6 @@ def submit():
     unique1, unique2 = get_unique_content(displayStrip1, displayStrip2)
     diffs1 = {d.strip().lower() for d in unique1 if len(d.strip()) > 2}
     diffs2 = {d.strip().lower() for d in unique2 if len(d.strip()) > 2}
-
-    open("diffs1.txt", "w", encoding="utf-8").write("\n\nLine: ".join(diffs1))
-    open("diffs2.txt", "w", encoding="utf-8").write("\n\nLine: ".join(diffs2))
-
-    temp = open("noMatch.txt", "w", encoding="utf-8")
-    temp2 = open("regexErrors.txt", "w", encoding="utf-8")
 
     def addDiffStyles(stylizedHTML, diffs):
         filtered_diffs = sorted({d for d in diffs if len(d) > 15}, key=len, reverse=True)
