@@ -103,8 +103,7 @@ def submit():
     splitChars = r'(?<=[.!?])\s+|\n+'
     #Set to true if you want to keep original site look, but adds a scroll bar
     # When false, page still has css, burt is more plain and easier to compare
-    #needStyles = False
-    needStyles = pyip.inputYesNo("Keep original styles? (yes/no): ")
+    needStyles = False
 
 
     #link1 = "https://ecampusontario.pressbooks.pub/commbusprofcdn/chapter/the-evolution-of-digital-media/"
