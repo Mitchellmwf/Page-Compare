@@ -182,14 +182,10 @@ def submit():
                     stylizedHTML,
                     flags=re.IGNORECASE | re.DOTALL
                 )
-                if new_html == stylizedHTML:
-                    temp2.write(f"\nNo match for diff: {diff[:50]}...")
                 stylizedHTML = new_html
             except re.error as e:
                 print(f"Regex error for diff: {diff[:50]}... {e}")
                 continue
-
-        temp.write(f"\n{stylizedHTML}\n")
         return stylizedHTML
 
 
