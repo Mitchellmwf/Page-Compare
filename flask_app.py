@@ -37,12 +37,12 @@ def submit():
     errors = {}
     if not link1:
         errors["link1"] = "Please paste a URL."
-    elif not is_valid_url(link1):
+    elif not checkURL(link1):
         errors["link1"] = "Must be a valid URL (include https://)."
 
     if not link2:
         errors["link2"] = "Please paste a URL."
-    elif not is_valid_url(link2):
+    elif not checkURL(link2):
         errors["link2"] = "Must be a valid URL (include https://)."
 
     if errors:
